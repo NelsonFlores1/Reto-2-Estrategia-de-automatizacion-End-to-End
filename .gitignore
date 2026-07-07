@@ -2,6 +2,7 @@
 **/target/
 **/.idea/
 **/*.iml
+**/allure-results/
 
 # Playwright / Python
 **/node_modules/
