@@ -15,20 +15,20 @@ pipeline {
 
         /*
         ============================================================
-        SERENITY BDD
+        STAGE 1 - SERENITY BDD JAVA
         ============================================================
         */
         stage('Build & Test Serenity') {
             steps {
-                dir("${WORKSPACE}\\SauceDemo_Playwright_python") {
-                    bat 'gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase"'
+                dir("${WORKSPACE}\\SauceDemo_Serenity_BDD_JAVA") {
+                    bat 'gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"'
                 }
             }
         }
 
         stage('Validar reportes Serenity') {
             steps {
-                dir("${WORKSPACE}\\SauceDemo_Playwright_python") {
+                dir("${WORKSPACE}\\SauceDemo_Serenity_BDD_JAVA") {
                     bat 'dir target\\site\\serenity'
                     bat 'dir target\\site\\serenity\\*.json'
                 }
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Publicar Serenity') {
             steps {
-                dir("${WORKSPACE}\\SauceDemo_Playwright_python") {
+                dir("${WORKSPACE}\\SauceDemo_Serenity_BDD_JAVA") {
                     publishHTML([
                         reportDir: 'target/site/serenity',
                         reportFiles: 'index.html',
@@ -52,7 +52,7 @@ pipeline {
 
         /*
         ============================================================
-        PLAYWRIGHT PYTHON
+        STAGE 2 - PLAYWRIGHT PYTHON
         ============================================================
         */
         stage('Setup Playwright Python') {
@@ -86,7 +86,7 @@ pipeline {
     post {
         always {
             // Archivos Serenity
-            dir("${WORKSPACE}\\SauceDemo_Playwright_python") {
+            dir("${WORKSPACE}\\SauceDemo_Serenity_BDD_JAVA") {
                 archiveArtifacts artifacts: 'target/site/serenity/**', fingerprint: true, allowEmptyArchive: true
             }
 
