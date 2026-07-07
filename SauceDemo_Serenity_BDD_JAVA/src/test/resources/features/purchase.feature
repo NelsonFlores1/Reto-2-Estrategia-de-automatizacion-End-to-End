@@ -4,9 +4,10 @@ Feature: Product Checkout
   I want to buy products from the catalog
   So that I can complete my purchase successfully
 
-  Scenario: Customer completes a purchase with two products
+  Scenario: Customer completes a purchase and verifies product prices
     Given the user accesses the SauceDemo login page
     When the user with the username "standard_user" and the password "secret_sauce" logs in
+    Then the user should see products dashboard with the title "Products"
     And the user adds the first product "Sauce Labs Backpack" to the cart
     And the user adds the second product "Sauce Labs Onesie" to the cart
     And the user goes to the shopping cart

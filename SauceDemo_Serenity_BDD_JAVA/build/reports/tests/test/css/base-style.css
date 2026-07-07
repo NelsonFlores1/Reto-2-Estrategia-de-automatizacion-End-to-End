@@ -72,7 +72,6 @@ ul.tabLinks li {
     border-bottom: none;
     margin-right: 6px;
     background-color: #f0f0f0;
-    cursor: pointer;
 }
 
 ul.tabLinks li.deselected > a {
@@ -149,10 +148,9 @@ div.tab td.numeric, div.tab th.numeric {
 }
 
 span.code {
-    display: block;
+    display: inline-block;
     margin-top: 0;
     margin-bottom: 1em;
-    position: relative;
 }
 
 span.code pre {
@@ -163,7 +161,6 @@ span.code pre {
     border: solid 1px #d0d0d0;
     min-width: 700px;
     width: auto;
-    overflow: auto;
 }
 
 span.wrapped pre {
