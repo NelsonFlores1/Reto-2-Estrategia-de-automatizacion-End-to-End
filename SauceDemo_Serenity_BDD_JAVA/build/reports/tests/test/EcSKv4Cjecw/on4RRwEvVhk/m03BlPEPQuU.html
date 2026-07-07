@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Customer completes a purchase with two products</title>
+<link href="../../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<div class="breadcrumbs">
+<a class="breadcrumb" href="../../index.html">all</a> &gt; 
+<a class="breadcrumb" href="../index.html">com.saucedemo.runners.CucumberTestSuite</a> &gt; 
+<a class="breadcrumb" href="index.html">Product Checkout</a> &gt; 
+<span class="breadcrumb">Customer completes a purchase with two products</span>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="failureGroup" href="#">Gradle Test Run :test</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Gradle Test Run :test</h2>
+<h1>Customer completes a purchase with two products</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+<li>
+<a class="" href="#">standard output</a>
+</li>
+<li>
+<a class="" href="#">error output</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">5.217s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures successRate">
+<div class="percent">0%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="result-details">
+<h3>Failure details</h3>
+<span class="code">
+<pre id="root-0-test-failure-Customer completes a purchase with two products">org.opentest4j.AssertionFailedError: 
+Expected: &lt;7.98&gt;
+     but: was &lt;7.99&gt;
+	at net.serenitybdd.screenplay.ErrorTally.throwSummaryExceptionFrom(ErrorTally.java:39)
+	at net.serenitybdd.screenplay.ErrorTally.reportAnyErrors(ErrorTally.java:33)
+	at net.serenitybdd.screenplay.Actor.should(Actor.java:397)
+	at com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heValidatesTheProductPrice(PurchaseStepDefinitions.java:39)
+	at ✽.the user validates that the product &quot;Sauce Labs Onesie&quot; has the price &quot;$7.98&quot;(file:///D:/Lite%20Thinking%20-%20diplomado%20ejecutivo%20en%20Automatizacion/Certificacion_2/SauceDemoScreenplayExample/src/test/resources/features/purchase.feature:15)
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-failure-Customer completes a purchase with two products">Copy</button>
+</span>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>standard output</h2>
+<span class="code">
+<pre id="root-0-test-stdout-Customer completes a purchase with two products">23:15:00.847 [Test worker] DEBUG net.serenitybdd.cucumber.core.plugin.SerenityReporter -- Running feature from file:///D:/Lite%20Thinking%20-%20diplomado%20ejecutivo%20en%20Automatizacion/Certificacion_2/SauceDemoScreenplayExample/src/test/resources/features/purchase.feature
+23:15:00.941 [Test worker] INFO net.thucydides.model.logging.ConsoleLoggingListener -- 
+  _____   ___   ___   _____     ___   _____     _     ___   _____   ___   ___  
+ |_   _| | __| / __| |_   _|   / __| |_   _|   /_\   | _ \ |_   _| | __| |   \ 
+   | |   | _|  \__ \   | |     \__ \   | |    / _ \  |   /   | |   | _|  | |) |
+   |_|   |___| |___/   |_|     |___/   |_|   /_/ \_\ |_|_\   |_|   |___| |___/ 
+
+Customer completes a purchase with two products(product-checkout;customer-completes-a-purchase-with-two-products)
+--------------------------------------------------------------------------------
+
+@Purchase
+?[1mScenario:?[22m Customer completes a purchase with two products                                                     ?[90m# src/test/resources/features/purchase.feature:7?[39m
+23:15:01.293 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: LoginStepDefinitions.userIsOnLoginPage - {0} opens the #pageName page
+23:15:01.380 [Test worker] INFO net.serenitybdd.core.webdriver.driverproviders.ChromeDriverProvider -- Starting Chrome driver instance with capabilities:
+23:15:01.382 [Test worker] INFO net.serenitybdd.core.webdriver.driverproviders.ChromeDriverProvider -- Capabilities {acceptInsecureCerts: true, browserName: chrome, goog:chromeOptions: {args: [test-type, no-sandbox, ignore-certificate-errors, incognito, remote-allow-origins=*], extensions: []}}
+23:15:04.153 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} opens the #pageName page
+  ?[32m✔?[39m ?[32m?[1mGiven ?[22mthe user accesses the SauceDemo login page?[39m                                                          ?[90m# com.saucedemo.stepdefinitions.LoginStepDefinitions.userIsOnLoginPage()?[39m
+23:15:04.252 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Username field
+23:15:04.350 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: Login.performAs - {0} enters #theTextAsAString into #target
+23:15:04.400 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Username field
+23:15:04.552 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} enters #theTextAsAString into #target
+23:15:04.554 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: Login.performAs - {0} enters #theTextAsAString into #target
+23:15:04.568 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Password field
+23:15:04.677 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} enters #theTextAsAString into #target
+23:15:04.680 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: Login.performAs - {0} clicks on #target
+23:15:04.690 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Login button
+23:15:04.862 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} clicks on #target
+  ?[32m✔?[39m ?[32m?[1mWhen ?[22mthe user with the username ?[1m&quot;standard_user&quot;?[22m and the password ?[1m&quot;secret_sauce&quot;?[22m logs in?[39m                   ?[90m# com.saucedemo.stepdefinitions.LoginStepDefinitions.heLogsInWithCredentials(java.lang.String,java.lang.String)?[39m
+23:15:04.878 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: AddProductToCart.performAs - {0} clicks on #target
+23:15:04.888 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for add to cart button for Sauce Labs Backpack
+23:15:05.002 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} clicks on #target
+  ?[32m✔?[39m ?[32m?[1mAnd ?[22mthe user adds the first product ?[1m&quot;Sauce Labs Backpack&quot;?[22m to the cart?[39m                                     ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heAddsFirstProductToTheCart(java.lang.String)?[39m
+23:15:05.015 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: AddProductToCart.performAs - {0} clicks on #target
+23:15:05.021 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for add to cart button for Sauce Labs Onesie
+23:15:05.145 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} clicks on #target
+  ?[32m✔?[39m ?[32m?[1mAnd ?[22mthe user adds the second product ?[1m&quot;Sauce Labs Onesie&quot;?[22m to the cart?[39m                                      ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heAddsSecondProductToTheCart(java.lang.String)?[39m
+23:15:05.167 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: PurchaseStepDefinitions.heGoesToTheShippingCart - Go to shopping cart
+23:15:05.183 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Shopping cart link
+23:15:05.254 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STARTING STEP: GoToCart.performAs - {0} clicks on #target
+23:15:05.261 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for Shopping cart link
+23:15:05.368 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: {0} clicks on #target
+23:15:05.372 [Test worker] DEBUG net.thucydides.core.steps.StepInterceptor -- STEP DONE: Go to shopping cart
+  ?[32m✔?[39m ?[32m?[1mAnd ?[22mthe user goes to the shopping cart?[39m                                                                    ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heGoesToTheShippingCart()?[39m
+23:15:05.458 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for precio del producto Sauce Labs Backpack
+  ?[32m✔?[39m ?[32m?[1mThen ?[22mthe user validates that the product ?[1m&quot;Sauce Labs Backpack&quot;?[22m has the price ?[1m&quot;$29.99&quot;?[22m?[39m                     ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heValidatesTheProductPrice(java.lang.String,java.lang.String)?[39m
+23:15:05.529 [Test worker] DEBUG net.serenitybdd.screenplay.targets.IFrameSwitcher -- default content already selected for precio del producto Sauce Labs Onesie
+23:15:05.564 [Test worker] DEBUG net.serenitybdd.core.photography.Darkroom -- Opening darkroom
+23:15:05.564 [Darkroom Processing Line] DEBUG net.serenitybdd.core.photography.DarkroomProcessingLine -- Darkroom processing line starting up
+23:15:05.710 [Test worker] DEBUG net.serenitybdd.core.photography.Darkroom -- Send negative for processing for D:\Lite Thinking - diplomado ejecutivo en Automatizacion\Certificacion_2\SauceDemoScreenplayExample\target\site\serenity\2318d8f01fc24bbe910eddc3c28929b2532aa29a94afd4603d8dadf7eff7a72b.png
+23:15:05.711 [Darkroom Processing Line] DEBUG net.serenitybdd.core.photography.DarkroomProcessingLine -- Processing screenshot image in /var/screenshots/screenshot-10273284314942697340
+23:15:05.711 [Darkroom Processing Line] DEBUG net.serenitybdd.core.photography.DarkroomProcessingLine -- Saving screenshot to D:\Lite Thinking - diplomado ejecutivo en Automatizacion\Certificacion_2\SauceDemoScreenplayExample\target\site\serenity\2318d8f01fc24bbe910eddc3c28929b2532aa29a94afd4603d8dadf7eff7a72b.png
+  ?[31m✘?[39m ?[31m?[1mThen ?[22mthe user validates that the product ?[1m&quot;Sauce Labs Onesie&quot;?[22m has the price ?[1m&quot;$7.98&quot;?[22m?[39m                        ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heValidatesTheProductPrice(java.lang.String,java.lang.String)?[39m
+        ?[31morg.opentest4j.AssertionFailedError: ?[39m
+        ?[31mExpected: &lt;7.98&gt;?[39m
+        ?[31m     but: was &lt;7.99&gt;?[39m
+        ?[31m	at net.serenitybdd.screenplay.ErrorTally.throwSummaryExceptionFrom(ErrorTally.java:39)?[39m
+        ?[31m	at net.serenitybdd.screenplay.ErrorTally.reportAnyErrors(ErrorTally.java:33)?[39m
+        ?[31m	at net.serenitybdd.screenplay.Actor.should(Actor.java:397)?[39m
+        ?[31m	at com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heValidatesTheProductPrice(PurchaseStepDefinitions.java:39)?[39m
+        ?[31m	at ✽.the user validates that the product &quot;Sauce Labs Onesie&quot; has the price &quot;$7.98&quot;(file:///D:/Lite%20Thinking%20-%20diplomado%20ejecutivo%20en%20Automatizacion/Certificacion_2/SauceDemoScreenplayExample/src/test/resources/features/purchase.feature:15)?[39m
+  ?[36m↷?[39m ?[36m?[1mAnd ?[22mthe user starts the checkout?[39m                                                                          ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heStartsTheCheckout()?[39m
+  ?[36m↷?[39m ?[36m?[1mAnd ?[22mthe user fills checkout information with the First Name ?[1m&quot;Nelson&quot;?[22m Last Name ?[1m&quot;QA&quot;?[22m and postalcode ?[1m&quot;0000&quot;?[22m?[39m ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heFillsCheckoutInformation(java.lang.String,java.lang.String,java.lang.String)?[39m
+  ?[36m↷?[39m ?[36m?[1mAnd ?[22mthe user continues the checkout?[39m                                                                       ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heContinuesTheCheckout()?[39m
+  ?[36m↷?[39m ?[36m?[1mAnd ?[22mthe user finishes the order?[39m                                                                           ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heFinishesTheOrder()?[39m
+  ?[36m↷?[39m ?[36m?[1mThen ?[22mthe user should see the order confirmation message ?[1m&quot;Thank you for your order!&quot;?[22m?[39m                       ?[90m# com.saucedemo.stepdefinitions.PurchaseStepDefinitions.heShouldSeeOrderConfirmation(java.lang.String)?[39m
+23:15:05.821 [Test worker] ERROR net.thucydides.model.logging.ConsoleLoggingListener -- 
+  _____   ___   ___   _____     ___     _     ___   _      ___   ___  
+ |_   _| | __| / __| |_   _|   | __|   /_\   |_ _| | |    | __| |   \ 
+   | |   | _|  \__ \   | |     | _|   / _ \   | |  | |__  | _|  | |) |
+   |_|   |___| |___/   |_|     |_|   /_/ \_\ |___| |____| |___| |___/ 
+
+Customer completes a purchase with two products
+-----------------------------------------------------------------------
+23:15:05.824 [Test worker] DEBUG net.thucydides.model.logging.ConsoleLoggingListener -- RELATED ISSUES: 
+23:15:05.826 [Test worker] ERROR net.thucydides.model.logging.ConsoleLoggingListener --     Test failed at step: Then The price of Sauce Labs Onesie should be (7.98)
+23:15:05.826 [Test worker] ERROR net.thucydides.model.logging.ConsoleLoggingListener --     Expected: &lt;7.98&gt; but: was &lt;7.99&gt;
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-stdout-Customer completes a purchase with two products">Copy</button>
+</span>
+</div>
+<div class="tab">
+<h2>error output</h2>
+<span class="code">
+<pre id="root-0-test-stderr-Customer completes a purchase with two products">jun 29, 2026 11:15:02 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-stderr-Customer completes a purchase with two products">Copy</button>
+</span>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 9.5.1</a> at 29 jun de 2026, 11:15:06 p. m.</p>
+</div>
+</div>
+</body>
+</html>

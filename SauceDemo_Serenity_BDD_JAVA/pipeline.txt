@@ -1,0 +1,108 @@
+/// ejemplo en clase
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Copiar proyecto al workspace') {
+            steps {
+                bat """
+                xcopy "D:\\Lite Thinking - diplomado ejecutivo en Automatizacion\\Certificacion_2\\SauceDemoScreenplayExample" "%WORKSPACE%" /E /I /Y
+                """
+            }
+        }
+
+        stage('Build & Test Serenity') {
+            steps {
+                dir("${WORKSPACE}") {
+                    bat 'gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"'
+                }
+            }
+        }
+
+        stage('Validar reportes') {
+            steps {
+                bat 'dir target\\site\\serenity'
+                bat 'dir target\\site\\serenity\\*.json'
+            }
+        }
+
+        stage('Publicar Serenity') {
+            steps {
+                publishHTML([
+                    reportDir: 'target/site/serenity',
+                    reportFiles: 'index.html',
+                    reportName: 'Reporte Serenity',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/site/serenity/**', fingerprint: true
+        }
+    }
+}
+
+
+///// USADO PARA CORRER CON EXITO - Done by myself
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Copy project to workspace') {
+            steps {
+                bat '''
+                xcopy "D:\\Lite Thinking - diplomado ejecutivo en Automatizacion\\Certificacion_2\\SauceDemoScreenplayExample" "%WORKSPACE%\\SauceDemoScreenplayExample" /E /I /Y
+                '''
+            }
+        }
+
+        stage('Build & Test Serenity') {
+            steps {
+                dir("${WORKSPACE}\\SauceDemoScreenplayExample") {
+                    bat 'gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"'
+                }
+            }
+        }
+
+        stage('Validar reportes') {
+            steps {
+                dir("${WORKSPACE}\\SauceDemoScreenplayExample") {
+                    bat 'dir target\\site\\serenity'
+                    bat 'dir target\\site\\serenity\\*.json'
+                }
+            }
+        }
+
+        stage('Publicar Serenity') {
+            steps {
+                dir("${WORKSPACE}\\SauceDemoScreenplayExample") {
+                    publishHTML([
+                        reportDir: 'target/site/serenity',
+                        reportFiles: 'index.html',
+                        reportName: 'Reporte Serenity',
+                        keepAll: true,
+                        alwaysLinkToLastBuild: true,
+                        allowMissing: false
+                    ])
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir("${WORKSPACE}\\SauceDemoScreenplayExample") {
+                archiveArtifacts artifacts: 'target/site/serenity/**', fingerprint: true, allowEmptyArchive: true
+                junit 'build/test-results/test/*.xml'
+            }
+        }
+    }
+}
+

@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '5.3.9'
+}
+
+//group = 'org.example'
+group = 'com.saucedemo'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    // Centralized version variables so you only update them in one place
+    serenityCoreVersion = '5.3.9'
+    cucumberVersion = '7.15.0'
+    junitVersion = '4.13.2' // old version
+//    junitVersion = '6.1.0' // new version
+    bonigarciaVersion = '6.3.4'
+}
+
+dependencies {
+    /*pre added
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'*/
+
+    // Serenity BDD Core & Screenplay modules
+    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
+
+    // Cucumber engine (The BDD translation layer)
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+
+    // JUnit 4 (The standard execution engine that Cucumber relies on to run)
+    testImplementation "junit:junit:${junitVersion}" // old version
+
+    // WebDriver Manager
+    // Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    testImplementation "io.github.bonigarcia:webdrivermanager:${bonigarciaVersion}"
+
+    // Logback (Updated: Required by Serenity 4+ to print clean console logs)
+    testImplementation 'ch.qos.logback:logback-classic:1.5.6'
+}
+
+test {
+//    useJUnitPlatform() // pre-added
+    testLogging.showStandardStreams = true
+    // Allows you to run specific tags from terminal (e.g., gradlew test -Dcucumber.filter.tags="@Smoke")
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+}
+test.finalizedBy(aggregate) // this always generates the execution report, without the needed to add 'aggregate' to execution command
+
+serenity {
+    // Generates the beautiful, easily shareable standalone HTML report
+    reports = ['single-page-html']
+}
