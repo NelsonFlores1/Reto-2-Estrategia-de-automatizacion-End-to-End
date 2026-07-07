@@ -1,0 +1,13 @@
+# Serenity BDD / Java
+**/target/
+**/.idea/
+**/*.iml
+
+# Playwright / Python
+**/node_modules/
+**/playwright-report/
+**/test-results/
+
+# OS
+.DS_Store
+Thumbs.db
