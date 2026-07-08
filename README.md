@@ -60,10 +60,10 @@ pytest tests/ -v --headed
 
 Ejecutar cada feature específico en modo visible:
 ```bash
-pytest tests/test_login_with_blocked_user.py -v
+pytest tests/test_login_with_blocked_user.py -v --headed
 ```
 ```bash
-pytest tests/test_sort_products.py -v 
+pytest tests/test_sort_products.py -v --headed
 ```
 # Desactivar el entorno virtual al terminar
 deactivate
