@@ -1,7 +1,7 @@
 Feature: Blocked user Authentication
     As a blocked customer
     I want to be prevented from logging into the store
-    So that the system system displays an error message
+    So that the system displays an error message
 
     Scenario: Attempting to log in with a blocked account
         Given the user wants to access the store from login page

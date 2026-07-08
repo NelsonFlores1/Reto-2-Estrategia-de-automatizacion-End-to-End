@@ -2,7 +2,7 @@
 Feature: Product Checkout
   As a SauceDemo customer
   I want to buy products from the catalog
-  So that I can complete my purchase successfully
+  So that I can validate their prices and complete my purchase successfully
 
   Scenario: Customer adds 2 products to the cart, validates their prices and completes the purchase.
     Given the user accesses the SauceDemo login page
@@ -13,7 +13,7 @@ Feature: Product Checkout
     And the user goes to the shopping cart
 
     Then the user validates that the product "Sauce Labs Backpack" has the price "$29.99"
-    Then the user validates that the product "Sauce Labs Onesie" has the price "$7.99"
+    Then the user validates that the product "Sauce Labs Onesie" has the price "$7.98"
 
     And the user starts the checkout
     And the user fills checkout information with the First Name "Nelson" Last Name "QA" and postalcode "0000"
