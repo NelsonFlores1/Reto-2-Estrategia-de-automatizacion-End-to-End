@@ -5,7 +5,7 @@ Este repositorio contiene los proyectos: Serenity BDD (Java) y Playwright (Pytho
 
 ## Instrucciones de instalacion
 
-### 1 Crear el entorno virtual (venv)
+#### 1. Crear el entorno virtual (venv)
 ```bash
 python -m venv venv
 ```
