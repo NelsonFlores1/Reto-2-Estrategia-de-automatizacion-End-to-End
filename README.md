@@ -54,7 +54,7 @@ Archivos principales:
 
 ## Ubicación
 
-```bash id="lb5xrv"
+```bash
 SauceDemo_Serenity_BDD_JAVA/
 ```
 
@@ -69,7 +69,7 @@ En este proyecto se automatizaron los escenarios de:
 
 Ambos escenarios están contenidos en el archivo:
 
-```bash id="r8u6mu"
+```bash
 purchase.feature
 ```
 
@@ -79,10 +79,9 @@ purchase.feature
 
 | Herramienta   | Versión mínima recomendada | Descripción                                     |
 | ------------- | -------------------------: | ----------------------------------------------- |
-| Java (JDK)    |                        17+ | Requerido para compilar y ejecutar el proyecto  |
+| Java (JDK)    |                        25+ | Requerido para compilar y ejecutar el proyecto  |
 | Gradle        |                      9.5.1 | Herramienta de build utilizada en este proyecto |
 | IntelliJ IDEA |                   Opcional | IDE usado para crear y trabajar con el proyecto |
-| Git           |                Recomendado | Para clonar el repositorio                      |
 
 > En este caso, el proyecto fue creado desde **IntelliJ IDEA** como un **proyecto Gradle**, y **Gradle 9.5.1** fue instalado manualmente en el entorno local para ejecutar el proyecto.
 
@@ -113,13 +112,13 @@ Sin embargo, para este proyecto se utilizó **IntelliJ + proyecto Gradle + insta
 
 ### 1. Ingresar al proyecto
 
-```bash id="9xcluh"
+```bash
 cd SauceDemo_Serenity_BDD_JAVA
 ```
 
 ### 2. Verificar Java
 
-```bash id="1wwhcv"
+```bash
 java -version
 ```
 
@@ -127,7 +126,7 @@ java -version
 
 Como este proyecto fue configurado usando una instalación local/manual de Gradle, validar que Gradle esté disponible en la terminal:
 
-```bash id="1s6k1p"
+```bash
 gradle -v
 ```
 
@@ -143,8 +142,8 @@ La primera vez que se ejecute el proyecto, Gradle descargará automáticamente l
 
 ### Ejecutar las pruebas del proyecto
 
-```bash id="53r2iw"
-gradle clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
+```bash
+gradle clean test aggregate "-Dcucumber.filter.tags=@Purchase"
 ```
 
 Este comando:
@@ -152,8 +151,6 @@ Este comando:
 1. limpia artefactos previos,
 2. ejecuta las pruebas automatizadas,
 3. genera el reporte de Serenity.
-
-> Si tu proyecto está configurado con tags diferentes, ajusta el filtro de ejecución según corresponda.
 
 ---
 
@@ -166,7 +163,7 @@ Los escenarios implementados en este proyecto son:
 
 Estos escenarios se encuentran definidos en el feature:
 
-```bash id="56i9wz"
+```bash
 purchase.feature
 ```
 
@@ -174,13 +171,11 @@ purchase.feature
 
 ## Reporte de Serenity
 
-Después de la ejecución, el reporte HTML de Serenity se genera en una ruta similar a:
+Después de la ejecución, el reporte HTML de Serenity se genera en la ruta:
 
-```bash id="1hzkqo"
+```bash
 target/site/serenity/index.html
 ```
-
-Si la configuración del proyecto genera el reporte en otra ubicación, revisar la carpeta de salida definida en Gradle o en la configuración de Serenity.
 
 ---
 
@@ -188,7 +183,7 @@ Si la configuración del proyecto genera el reporte en otra ubicación, revisar 
 
 ## Ubicación
 
-```bash id="ctzqmx"
+```bash
 SauceDemo_Playwright_python/
 ```
 
@@ -208,8 +203,9 @@ En este proyecto se automatizaron los escenarios de:
 | Herramienta | Versión mínima recomendada | Descripción                  |
 | ----------- | -------------------------: | ---------------------------- |
 | Python      |                      3.12+ | Intérprete de Python         |
-| pip         |             Última estable | Gestor de paquetes de Python |
-| Git         |                Recomendado | Para clonar el repositorio   |
+| Java (JDK)  |                        25+ | Requerido para Gradle        |
+| Gradle      |                      9.5.1 | Orquestador de tareas        |
+| Allure CLI  |                        2.x | Generacion de reportes visuales |
 
 ---
 
@@ -217,13 +213,13 @@ En este proyecto se automatizaron los escenarios de:
 
 ### 1. Ingresar al proyecto
 
-```bash id="fovb7k"
+```bash
 cd SauceDemo_Playwright_python
 ```
 
 ### 2. Crear el entorno virtual
 
-```bash id="dt3r2f"
+```bash
 python -m venv venv
 ```
 
@@ -231,7 +227,7 @@ Esto crea un directorio `venv/` con un intérprete Python aislado.
 
 ### 3. Activar el entorno virtual
 
-```bash id="ok9k7d"
+```bash
 # Windows (CMD)
 venv\Scripts\activate.bat
 
@@ -246,7 +242,7 @@ Cuando el entorno virtual esté activo, verás `(venv)` al inicio de la terminal
 
 ### 4. Instalar dependencias
 
-```bash id="5pcx0e"
+```bash
 pip install -r requirements.txt
 ```
 
@@ -272,13 +268,13 @@ pytest tests/ -v --headed
 
 ### Ejecutar el escenario de login con usuario bloqueado
 
-```bash id="ehglqj"
+```bash
 pytest tests/test_login_with_blocked_user.py -v --headed
 ```
 
 ### Ejecutar el escenario de ordenamiento de productos
 
-```bash id="4sk31z"
+```bash
 pytest tests/test_sort_products.py -v --headed
 ```
 
@@ -302,7 +298,7 @@ Archivos asociados:
 
 Al finalizar la ejecución, puedes salir del entorno virtual con:
 
-```bash id="ryghu5"
+```bash
 deactivate
 ```
 
@@ -344,14 +340,16 @@ Para ejecutar el pipeline correctamente en Jenkins, la máquina o agente debe co
 
 ## Serenity BDD
 
-```bash id="1yyol7"
+```bash
 cd SauceDemo_Serenity_BDD_JAVA
-gradle clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
+gradle clean test aggregate
+o
+./gradlew.bat clean test aggregate
 ```
 
 ## Playwright Python
 
-```bash id="gztlj7"
+```bash
 cd SauceDemo_Playwright_python
 python -m venv venv
 venv\Scripts\activate.bat
