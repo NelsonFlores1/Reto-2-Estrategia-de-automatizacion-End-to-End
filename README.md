@@ -2,16 +2,16 @@
 
 Este repositorio contiene dos proyectos de automatización para la aplicación **SauceDemo**:
 
-* **SauceDemo_Serenity_BDD_JAVA** → Framework de automatización con **Serenity BDD + Java + Gradle**
-* **SauceDemo_Playwright_python** → Framework de automatización con **Playwright + Python + Pytest**
+* **SauceDemo_Serenity_BDD_JAVA** → Proyecto de automatización con **Serenity BDD + Java + Gradle**
+* **SauceDemo_Playwright_python** → Proyecto de automatización con **Playwright + Python + Pytest**
 
-Cada proyecto puede ejecutarse de forma independiente y ambos están integrados en un pipeline de **Jenkins** mediante el archivo `Jenkinsfile`.
+Cada proyecto cubre escenarios distintos y ambos están integrados en un pipeline de **Jenkins** mediante el archivo `Jenkinsfile`.
 
 ---
 
 # Estructura del repositorio
 
-```bash
+```bash id="xv9q0w"
 .
 ├── Jenkinsfile
 ├── README.md
@@ -21,29 +21,91 @@ Cada proyecto puede ejecutarse de forma independiente y ambos están integrados 
 
 ---
 
-# Proyecto 1: Playwright (Python)
+# Cobertura de escenarios automatizados
+
+La automatización de esta tarea se dividió entre ambos frameworks de la siguiente manera:
+
+## Escenarios implementados en Serenity BDD (Java)
+
+Ubicación: `SauceDemo_Serenity_BDD_JAVA`
+
+* **Login → Agregar productos → Checkout**
+* **Validación de precios en el carrito**
+
+Archivo principal:
+
+* `purchase.feature`
+
+## Escenarios implementados en Playwright (Python)
+
+Ubicación: `SauceDemo_Playwright_python`
+
+* **Login con usuario bloqueado**
+* **Ordenamiento de productos**
+
+Archivos principales:
+
+* `test_login_with_blocked_user.py`
+* `test_sort_products.py`
+
+---
+
+# Proyecto 1: Serenity BDD (Java)
 
 ## Ubicación
 
-```bash
-SauceDemo_Playwright_python/
+```bash id="lb5xrv"
+SauceDemo_Serenity_BDD_JAVA/
 ```
 
 ## Descripción
 
-Este proyecto implementa automatización de pruebas con **Playwright en Python**, utilizando **Pytest** como framework de ejecución y **pytest-bdd** para escenarios BDD.
+Este proyecto implementa automatización de pruebas con **Serenity BDD en Java**, utilizando **Gradle** como herramienta de construcción y ejecución.
+
+En este proyecto se automatizaron los escenarios de:
+
+* **Login → Agregar productos → Checkout**
+* **Validación de precios en el carrito**
+
+Ambos escenarios están contenidos en el archivo:
+
+```bash id="r8u6mu"
+purchase.feature
+```
 
 ---
 
 ## Requisitos del entorno
 
-| Herramienta |                 Versión mínima | Descripción                   |
-| ----------- | -----------------------------: | ----------------------------- |
-| Python      |                          3.12+ | Intérprete de Python          |
-| pip         |                 Última estable | Gestor de paquetes de Python  |
-| Playwright  | Incluido en `requirements.txt` | Automatización de navegadores |
+| Herramienta   | Versión mínima recomendada | Descripción                                     |
+| ------------- | -------------------------: | ----------------------------------------------- |
+| Java (JDK)    |                        17+ | Requerido para compilar y ejecutar el proyecto  |
+| Gradle        |                      9.5.1 | Herramienta de build utilizada en este proyecto |
+| IntelliJ IDEA |                   Opcional | IDE usado para crear y trabajar con el proyecto |
+| Git           |                Recomendado | Para clonar el repositorio                      |
 
-> **Nota:** No es necesario instalar Playwright manualmente desde el sistema si se siguen los pasos de instalación del proyecto.
+> En este caso, el proyecto fue creado desde **IntelliJ IDEA** como un **proyecto Gradle**, y **Gradle 9.5.1** fue instalado manualmente en el entorno local para ejecutar el proyecto.
+
+---
+
+## Cómo fue creado este proyecto
+
+Este proyecto de Serenity fue creado siguiendo este enfoque:
+
+1. Se creó un **nuevo proyecto Gradle desde IntelliJ IDEA**.
+2. Se configuró **Java** como lenguaje del proyecto.
+3. Se instaló **Gradle 9.5.1** manualmente en el sistema.
+4. Se agregaron las dependencias necesarias para **Serenity BDD**, **JUnit/Cucumber** y el resto del stack de automatización.
+
+### Nota
+
+Existen otras formas válidas de preparar un proyecto Serenity, por ejemplo:
+
+* usar **Gradle Wrapper** (`gradlew.bat`) para evitar depender de una instalación global de Gradle,
+* crear el proyecto manualmente desde consola,
+* partir de un template base de Serenity.
+
+Sin embargo, para este proyecto se utilizó **IntelliJ + proyecto Gradle + instalación manual de Gradle 9.5.1**.
 
 ---
 
@@ -51,13 +113,117 @@ Este proyecto implementa automatización de pruebas con **Playwright en Python**
 
 ### 1. Ingresar al proyecto
 
-```bash
+```bash id="9xcluh"
+cd SauceDemo_Serenity_BDD_JAVA
+```
+
+### 2. Verificar Java
+
+```bash id="1wwhcv"
+java -version
+```
+
+### 3. Verificar Gradle
+
+Como este proyecto fue configurado usando una instalación local/manual de Gradle, validar que Gradle esté disponible en la terminal:
+
+```bash id="1s6k1p"
+gradle -v
+```
+
+La salida debería mostrar una versión compatible, por ejemplo **Gradle 9.5.1**.
+
+### 4. Descargar dependencias del proyecto
+
+La primera vez que se ejecute el proyecto, Gradle descargará automáticamente las dependencias declaradas en el archivo de build.
+
+---
+
+## Ejecución de pruebas
+
+### Ejecutar las pruebas del proyecto
+
+```bash id="53r2iw"
+gradle clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
+```
+
+Este comando:
+
+1. limpia artefactos previos,
+2. ejecuta las pruebas automatizadas,
+3. genera el reporte de Serenity.
+
+> Si tu proyecto está configurado con tags diferentes, ajusta el filtro de ejecución según corresponda.
+
+---
+
+## Escenarios cubiertos en Serenity
+
+Los escenarios implementados en este proyecto son:
+
+* **Login → Agregar productos → Checkout**
+* **Validación de precios en el carrito**
+
+Estos escenarios se encuentran definidos en el feature:
+
+```bash id="56i9wz"
+purchase.feature
+```
+
+---
+
+## Reporte de Serenity
+
+Después de la ejecución, el reporte HTML de Serenity se genera en una ruta similar a:
+
+```bash id="1hzkqo"
+target/site/serenity/index.html
+```
+
+Si la configuración del proyecto genera el reporte en otra ubicación, revisar la carpeta de salida definida en Gradle o en la configuración de Serenity.
+
+---
+
+# Proyecto 2: Playwright (Python)
+
+## Ubicación
+
+```bash id="ctzqmx"
+SauceDemo_Playwright_python/
+```
+
+## Descripción
+
+Este proyecto implementa automatización de pruebas con **Playwright en Python**, utilizando **Pytest** como framework de ejecución y `pytest-bdd` para la integración con escenarios BDD.
+
+En este proyecto se automatizaron los escenarios de:
+
+* **Login con usuario bloqueado**
+* **Ordenamiento de productos**
+
+---
+
+## Requisitos del entorno
+
+| Herramienta | Versión mínima recomendada | Descripción                  |
+| ----------- | -------------------------: | ---------------------------- |
+| Python      |                      3.12+ | Intérprete de Python         |
+| pip         |             Última estable | Gestor de paquetes de Python |
+| Git         |                Recomendado | Para clonar el repositorio   |
+
+---
+
+## Instalación
+
+### 1. Ingresar al proyecto
+
+```bash id="fovb7k"
 cd SauceDemo_Playwright_python
 ```
 
 ### 2. Crear el entorno virtual
 
-```bash
+```bash id="dt3r2f"
 python -m venv venv
 ```
 
@@ -65,7 +231,7 @@ Esto crea un directorio `venv/` con un intérprete Python aislado.
 
 ### 3. Activar el entorno virtual
 
-```bash
+```bash id="ok9k7d"
 # Windows (CMD)
 venv\Scripts\activate.bat
 
@@ -80,24 +246,15 @@ Cuando el entorno virtual esté activo, verás `(venv)` al inicio de la terminal
 
 ### 4. Instalar dependencias
 
-```bash
+```bash id="5pcx0e"
 pip install -r requirements.txt
 ```
 
-Este comando instala las dependencias del proyecto, incluyendo:
-
-| Paquete             | Propósito                            |
-| ------------------- | ------------------------------------ |
-| `playwright`        | Automatización del navegador         |
-| `pytest`            | Framework de testing                 |
-| `pytest-bdd`        | Integración BDD con Gherkin          |
-| `pytest-playwright` | Integración Playwright + Pytest      |
-| `allure-pytest`     | Generación de resultados para Allure |
-| `hypothesis`        | Testing basado en propiedades        |
+Este comando instala las dependencias necesarias para el proyecto, incluyendo Playwright, Pytest y reportería Allure.
 
 ### 5. Instalar el navegador Chromium
 
-```bash
+```bash id="4m1jyu"
 playwright install chromium
 ```
 
@@ -107,21 +264,37 @@ Este comando descarga el binario de Chromium que será utilizado por Playwright 
 
 ## Ejecución de pruebas
 
-### Ejecutar todos los tests en modo visible
+### Ejecutar todos los tests
 
-```bash
+```bash id="ft84r2"
 pytest tests/ -v --headed
 ```
 
-### Ejecutar un test específico
+### Ejecutar el escenario de login con usuario bloqueado
 
-```bash
+```bash id="ehglqj"
 pytest tests/test_login_with_blocked_user.py -v --headed
 ```
 
-```bash
+### Ejecutar el escenario de ordenamiento de productos
+
+```bash id="4sk31z"
 pytest tests/test_sort_products.py -v --headed
 ```
+
+---
+
+## Escenarios cubiertos en Playwright
+
+Los escenarios implementados en este proyecto son:
+
+* **Login con usuario bloqueado**
+* **Ordenamiento de productos**
+
+Archivos asociados:
+
+* `test_login_with_blocked_user.py`
+* `test_sort_products.py`
 
 ---
 
@@ -129,101 +302,9 @@ pytest tests/test_sort_products.py -v --headed
 
 Al finalizar la ejecución, puedes salir del entorno virtual con:
 
-```bash
+```bash id="ryghu5"
 deactivate
 ```
-
----
-
-# Proyecto 2: Serenity BDD (Java)
-
-## Ubicación
-
-```bash
-SauceDemo_Serenity_BDD_JAVA/
-```
-
-## Descripción
-
-Este proyecto implementa automatización de pruebas con **Serenity BDD en Java**, utilizando **Gradle** como herramienta de construcción y ejecución.
-Las pruebas están organizadas bajo un enfoque **BDD**, con escenarios escritos en Gherkin y ejecución automatizada mediante Serenity.
-
----
-
-## Requisitos del entorno
-
-| Herramienta |                                         Versión mínima | Descripción                                    |
-| ----------- | -----------------------------------------------------: | ---------------------------------------------- |
-| Java (JDK)  |                                                    17+ | Requerido para compilar y ejecutar el proyecto |
-| Gradle      | No requiere instalación global si se usa `gradlew.bat` | Wrapper incluido en el proyecto                |
-| Git         |                                            Recomendado | Para clonar el repositorio                     |
-
-> **Importante:** Este proyecto utiliza **Gradle Wrapper** (`gradlew.bat`), por lo que no es obligatorio tener Gradle instalado globalmente en el sistema.
-
----
-
-## Instalación
-
-### 1. Ingresar al proyecto
-
-```bash
-cd SauceDemo_Serenity_BDD_JAVA
-```
-
-### 2. Verificar que Java esté disponible
-
-```bash
-java -version
-```
-
-### 3. Verificar que el wrapper de Gradle exista en el proyecto
-
-Dentro de la carpeta del proyecto deben existir archivos como:
-
-```bash
-gradlew.bat
-gradlew
-build.gradle
-settings.gradle
-```
-
-No es necesario instalar dependencias manualmente, ya que Gradle descargará las requeridas durante la primera ejecución.
-
----
-
-## Ejecución de pruebas
-
-### Ejecutar todas las pruebas y generar el reporte Serenity
-
-```bash
-./gradlew.bat clean test aggregate
-```
-
-### Ejecutar escenarios filtrando por tags
-
-Ejemplo con los tags utilizados en este proyecto:
-
-```bash
-./gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase"
-```
-
-Este comando:
-
-1. limpia artefactos previos,
-2. ejecuta las pruebas automatizadas,
-3. genera el reporte de Serenity.
-
----
-
-## Reporte de Serenity
-
-Después de la ejecución, el reporte HTML se genera en:
-
-```bash
-target/site/serenity/index.html
-```
-
-Si el proyecto genera el reporte en otra ruta según su configuración interna, revisar la carpeta de salida definida en el build.
 
 ---
 
@@ -231,15 +312,15 @@ Si el proyecto genera el reporte en otra ruta según su configuración interna, 
 
 El repositorio incluye un archivo `Jenkinsfile` que ejecuta ambos proyectos dentro del mismo pipeline:
 
-1. **Serenity BDD (Java)**
-2. **Playwright (Python)**
+1. **SauceDemo_Serenity_BDD_JAVA**
+2. **SauceDemo_Playwright_python**
 
-## Flujo del pipeline
+## Flujo general del pipeline
 
 * Checkout del repositorio
-* Ejecución del proyecto **SauceDemo_Serenity_BDD_JAVA**
+* Ejecución del proyecto **Serenity BDD (Java)**
 * Publicación del reporte Serenity
-* Configuración del entorno para **SauceDemo_Playwright_python**
+* Configuración del entorno para **Playwright (Python)**
 * Ejecución de pruebas Playwright
 * Publicación de resultados Allure
 
@@ -252,6 +333,7 @@ Para ejecutar el pipeline correctamente en Jenkins, la máquina o agente debe co
 | Herramienta                                            | Requerido para                                     |
 | ------------------------------------------------------ | -------------------------------------------------- |
 | Java JDK                                               | Serenity BDD                                       |
+| Gradle                                                 | Serenity BDD                                       |
 | Python                                                 | Playwright                                         |
 | Git                                                    | Clonar el repositorio                              |
 | Jenkins Plugins: Git, Pipeline, HTML Publisher, Allure | Integración del pipeline y publicación de reportes |
@@ -262,14 +344,14 @@ Para ejecutar el pipeline correctamente en Jenkins, la máquina o agente debe co
 
 ## Serenity BDD
 
-```bash
+```bash id="1yyol7"
 cd SauceDemo_Serenity_BDD_JAVA
-gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
+gradle clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
 ```
 
 ## Playwright Python
 
-```bash
+```bash id="gztlj7"
 cd SauceDemo_Playwright_python
 python -m venv venv
 venv\Scripts\activate.bat
