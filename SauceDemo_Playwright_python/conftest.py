@@ -7,6 +7,7 @@ and Allure screenshot attachment on test failure.
 
 import os
 import logging
+from pathlib import Path
 
 import pytest
 import allure
@@ -25,6 +26,7 @@ ELEMENT_VISIBILITY_TIMEOUT_MS = 10_000  # 10 seconds
 
 # Saucedemo configuration
 SAUCEDEMO_BASE_URL = "https://www.saucedemo.com"
+SCREENSHOTS_DIR = Path("allure-results") / "screenshots"
 
 
 # def pytest_configure(config):
@@ -119,11 +121,43 @@ def actor(page: Page) -> Actor:
 
 
 # --- Screenshot Evidence ---
-
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """
+    Capture screenshots and attach them to the Allure report when a test fails.
+    """
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when != "call" or not report.failed:
+        return
+
+    page_instance = item.funcargs.get("page")
+    if page_instance is None:
+        return
+
+    try:
+        SCREENSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+        screenshot_path = SCREENSHOTS_DIR / f"{item.name}.png"
+        screenshot = page_instance.screenshot()
+        screenshot_path.write_bytes(screenshot)
+        allure.attach(
+            screenshot,
+            name=f"screenshot_{item.name}_FAILED",
+            attachment_type=allure.attachment_type.PNG,
+        )
+    except Exception as screenshot_error:
+        # Log screenshot failure gracefully; do not mask the original error
+        logger.warning(
+            "Failed to capture screenshot for '%s': %s",
+            item.nodeid,
+            screenshot_error,
+        )
+"""
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    
     Capture screenshots and attach to the Allure report.
 
     Behavior controlled by --screenshot option:
@@ -131,7 +165,7 @@ def pytest_runtest_makereport(item, call):
       - 'on-failure': captures screenshot only when a test fails
 
     Can also be set via environment variable: SCREENSHOT_MODE=on-failure
-    """
+    
     outcome = yield
     report = outcome.get_result()
 
@@ -176,3 +210,4 @@ def pytest_runtest_makereport(item, call):
             item.nodeid,
             screenshot_error,
         )
+"""
