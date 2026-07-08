@@ -153,61 +153,60 @@ def pytest_bdd_after_step(request, feature, scenario, step, step_func, step_func
     status = "AFTER_STEP"
     _capture_screenshot(page_instance, request.node.name, status)
 
-"""
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+
+# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
     
-    Capture screenshots and attach to the Allure report.
+#     # Capture screenshots and attach to the Allure report.
 
-    Behavior controlled by --screenshot option:
-      - 'always' (default): captures screenshot at end of every test (pass or fail)
-      - 'on-failure': captures screenshot only when a test fails
+#     # Behavior controlled by --screenshot option:
+#     #   - 'always' (default): captures screenshot at end of every test (pass or fail)
+#     #   - 'on-failure': captures screenshot only when a test fails
 
-    Can also be set via environment variable: SCREENSHOT_MODE=on-failure
+#     # Can also be set via environment variable: SCREENSHOT_MODE=on-failure
     
-    outcome = yield
-    report = outcome.get_result()
+#     outcome = yield
+#     report = outcome.get_result()
 
-    if report.when != "call":
-        return
+#     if report.when != "call":
+#         return
 
-    # Determine screenshot mode
-    screenshot_mode = os.environ.get("SCREENSHOT_MODE", "").strip()
-    if not screenshot_mode:
-        screenshot_mode = item.config.getoption("--screenshot-mode", default="always")
+#     # Determine screenshot mode
+#     screenshot_mode = os.environ.get("SCREENSHOT_MODE", "").strip()
+#     if not screenshot_mode:
+#         screenshot_mode = item.config.getoption("--screenshot-mode", default="always")
 
-    # Decide whether to capture
-    should_capture = False
-    if screenshot_mode == "always":
-        should_capture = True
-    elif screenshot_mode == "on-failure" and report.failed:
-        should_capture = True
+#     # Decide whether to capture
+#     should_capture = False
+#     if screenshot_mode == "always":
+#         should_capture = True
+#     elif screenshot_mode == "on-failure" and report.failed:
+#         should_capture = True
 
-    if not should_capture:
-        return
+#     if not should_capture:
+#         return
 
-    # Attempt to get the page fixture from the test item
-    page_instance = item.funcargs.get("page")
-    if page_instance is None:
-        return
+#     # Attempt to get the page fixture from the test item
+#     page_instance = item.funcargs.get("page")
+#     if page_instance is None:
+#         return
 
-    # Determine attachment name based on result
-    status = "FAILED" if report.failed else "PASSED"
-    attachment_name = f"screenshot_{item.name}_{status}"
+#     # Determine attachment name based on result
+#     status = "FAILED" if report.failed else "PASSED"
+#     attachment_name = f"screenshot_{item.name}_{status}"
 
-    try:
-        screenshot = page_instance.screenshot()
-        allure.attach(
-            screenshot,
-            name=attachment_name,
-            attachment_type=allure.attachment_type.PNG,
-        )
-    except Exception as screenshot_error:
-        # Log screenshot failure gracefully; do not mask the original error
-        logger.warning(
-            "Failed to capture screenshot for '%s': %s",
-            item.nodeid,
-            screenshot_error,
-        )
-"""
+#     try:
+#         screenshot = page_instance.screenshot()
+#         allure.attach(
+#             screenshot,
+#             name=attachment_name,
+#             attachment_type=allure.attachment_type.PNG,
+#         )
+#     except Exception as screenshot_error:
+#         # Log screenshot failure gracefully; do not mask the original error
+#         logger.warning(
+#             "Failed to capture screenshot for '%s': %s",
+#             item.nodeid,
+#             screenshot_error,
+#         )
