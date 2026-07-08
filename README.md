@@ -64,7 +64,8 @@ pytest tests/test_login_with_blocked_user.py -v --headed
 ```bash
 pytest tests/test_sort_products.py -v --headed
 ```
-# Desactivar el entorno virtual al terminar
+## Desactivar el entorno virtual al terminar
+```bash
 deactivate
 ```
 
@@ -80,7 +81,7 @@ deactivate
 
 # Instrucciones para el proyecto Serenity BDD (Java)
 
-## Instrucciones de instalacio
+## Instrucciones de instalacion
 
 ## Ejecucion de pruebas
 
