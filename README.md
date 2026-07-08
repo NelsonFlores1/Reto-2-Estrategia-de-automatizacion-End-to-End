@@ -320,6 +320,95 @@ El repositorio incluye un archivo `Jenkinsfile` que ejecuta ambos proyectos dent
 * Ejecución de pruebas Playwright
 * Publicación de resultados Allure
 
+# Ejecución del repositorio en Jenkins
+
+## Crear el job en Jenkins
+
+1. Ingresar a Jenkins.
+2. Hacer clic en **New Item**.
+3. Asignar un nombre al job, por ejemplo:
+
+```bash
+Reto_2_Estrategia_Automatizacion_E2E
+```
+
+4. Seleccionar el tipo **Pipeline**.
+5. Hacer clic en **OK**.
+
+---
+
+## Configurar el job para leer el repositorio
+
+Dentro de la configuración del job, dirigirse a la sección **Pipeline** y completar los siguientes campos.
+
+### 1. Definition
+
+En el campo **Definition**, seleccionar:
+
+```bash
+Pipeline script from SCM
+```
+
+### 2. SCM
+
+En el campo **SCM**, seleccionar:
+
+```bash
+Git
+```
+
+### 3. Repository URL
+
+En **Repository URL**, ingresar la URL del repositorio:
+
+[Reto-2-Estrategia-de-automatizacion-End-to-End](https://github.com/NelsonFlores1/Reto-2-Estrategia-de-automatizacion-End-to-End?utm_source=chatgpt.com)
+
+### 4. Branches to build
+
+En **Branches to build**, configurar la rama principal del repositorio:
+
+```bash
+*/main
+```
+
+### 5. Script Path
+
+En **Script Path**, indicar la ruta del archivo del pipeline:
+
+```bash
+Jenkinsfile
+```
+
+6. Guardar la configuración del job.
+
+---
+
+## Ejecutar el pipeline
+
+1. Ingresar al job creado en Jenkins.
+2. Hacer clic en **Build Now**.
+3. Esperar a que Jenkins realice el checkout del repositorio y ejecute el pipeline definido en el archivo `Jenkinsfile`.
+
+---
+
+## Flujo esperado del pipeline
+
+Durante la ejecución, Jenkins debe realizar el siguiente flujo:
+
+### 1. Checkout del repositorio
+
+Jenkins clona el repositorio y carga el contenido del proyecto en su workspace.
+
+### 2. Ejecución del proyecto Serenity BDD
+
+Jenkins ingresa a la carpeta:
+
+```bash
+SauceDemo_Serenity_BDD_JAVA
+```
+
+y ejecuta las pruebas automatizadas del proyecto Serenity BDD.
+
 ---
 
 # Requisitos del entorno para Jenkins
@@ -332,7 +421,7 @@ Para ejecutar el pipeline correctamente en Jenkins, la máquina o agente debe co
 | Gradle                                                 | Serenity BDD                                       |
 | Python                                                 | Playwright                                         |
 | Git                                                    | Clonar el repositorio                              |
-| Jenkins Plugins: Git, Pipeline, HTML Publisher, Allure | Integración del pipeline y publicación de reportes |
+| Jenkins Plugins                                        | Integración del pipeline y publicación de reportes |
 
 ---
 
