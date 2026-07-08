@@ -6,4 +6,4 @@ Feature: Blocked user Authentication
     Scenario: Attempting to log in with a blocked account
         Given the user wants to access the store from login page
         When he logs in with username "locked_out_user" and password "secret_sauce"
-        Then he should see an error message saying "Epic sadface: Sorry, this user has been locked out."
+        Then he should see an error message saying "Epic sadface: Sorry, this user has been locked out.TEST"

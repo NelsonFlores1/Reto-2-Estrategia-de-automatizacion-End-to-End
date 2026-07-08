@@ -121,38 +121,38 @@ def actor(page: Page) -> Actor:
 
 
 # --- Screenshot Evidence ---
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    """
-    Capture screenshots and attach them to the Allure report when a test fails.
-    """
-    outcome = yield
-    report = outcome.get_result()
 
-    if report.when != "call" or not report.failed:
-        return
+def _capture_screenshot(page_instance: Page, test_name: str, status: str) -> None:
+    try:
+        SCREENSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+        screenshot_path = SCREENSHOTS_DIR / f"{test_name}_{status}.png"
+        page_instance.screenshot(path=str(screenshot_path), full_page=True)
+        with allure.step("Screenshot evidence"):
+            allure.attach.file(
+                str(screenshot_path),
+                name=f"screenshot_{test_name}_{status}",
+                attachment_type=allure.attachment_type.PNG,
+            )
+    except Exception as screenshot_error:
+        logger.warning(
+            "Failed to capture screenshot for '%s': %s",
+            test_name,
+            screenshot_error,
+        )
 
-    page_instance = item.funcargs.get("page")
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_bdd_after_step(request, feature, scenario, step, step_func, step_func_args):
+    """
+    Capture a screenshot after each BDD step while the page is still alive.
+    """
+    page_instance = request.getfixturevalue("page")
     if page_instance is None:
         return
 
-    try:
-        SCREENSHOTS_DIR.mkdir(parents=True, exist_ok=True)
-        screenshot_path = SCREENSHOTS_DIR / f"{item.name}.png"
-        screenshot = page_instance.screenshot()
-        screenshot_path.write_bytes(screenshot)
-        allure.attach(
-            screenshot,
-            name=f"screenshot_{item.name}_FAILED",
-            attachment_type=allure.attachment_type.PNG,
-        )
-    except Exception as screenshot_error:
-        # Log screenshot failure gracefully; do not mask the original error
-        logger.warning(
-            "Failed to capture screenshot for '%s': %s",
-            item.nodeid,
-            screenshot_error,
-        )
+    status = "AFTER_STEP"
+    _capture_screenshot(page_instance, request.node.name, status)
+
 """
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
