@@ -56,11 +56,15 @@ Descarga el binario de Chromium que Playwright usará para ejecutar las pruebas.
 ```bash
 # Ejecutar todos los features en modo visible (ver el navegador)
 pytest tests/ -v --headed
+```
 
-# Ejecutar cada feature específico en modo visible:
+Ejecutar cada feature específico en modo visible:
+```bash
 pytest tests/test_login_with_blocked_user.py -v
+```
+```bash
 pytest tests/test_sort_products.py -v 
-
+```
 # Desactivar el entorno virtual al terminar
 deactivate
 ```
