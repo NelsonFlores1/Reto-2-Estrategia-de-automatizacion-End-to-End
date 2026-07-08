@@ -196,7 +196,7 @@ No es necesario instalar dependencias manualmente, ya que Gradle descargará las
 ### Ejecutar todas las pruebas y generar el reporte Serenity
 
 ```bash
-gradlew.bat clean test aggregate
+./gradlew.bat clean test aggregate
 ```
 
 ### Ejecutar escenarios filtrando por tags
@@ -204,7 +204,7 @@ gradlew.bat clean test aggregate
 Ejemplo con los tags utilizados en este proyecto:
 
 ```bash
-gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase or @InvalidLogin"
+./gradlew.bat clean test aggregate "-Dcucumber.filter.tags=@Purchase"
 ```
 
 Este comando:
